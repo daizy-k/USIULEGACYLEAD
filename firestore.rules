@@ -1,0 +1,76 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isUsiuEmail() {
+      return isSignedIn() &&
+        request.auth.token.email.matches('.*@usiu[.]ac[.]ke$');
+    }
+
+    function userDoc() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+
+    function userClubId() {
+      return userDoc().data.club_id;
+    }
+
+    function userRole() {
+      return userDoc().data.role;
+    }
+
+    function isOwnClub(clubId) {
+      return isUsiuEmail() && userClubId() == clubId;
+    }
+
+    function isClubAdmin(clubId) {
+      return isOwnClub(clubId) && userRole() == 'admin';
+    }
+
+    // Each user's own profile document.
+    // A user may read their own profile; only an existing club admin
+    // may create or modify role/club_id assignments.
+    match /users/{userId} {
+      allow read: if isSignedIn() && request.auth.uid == userId;
+      allow create: if isUsiuEmail() && request.auth.uid == userId;
+      allow update: if isSignedIn() &&
+        (request.auth.uid == userId &&
+          request.resource.data.club_id == resource.data.club_id &&
+          request.resource.data.role == resource.data.role) ||
+        isClubAdmin(resource.data.club_id);
+      allow delete: if isClubAdmin(resource.data.club_id);
+    }
+
+    // Clubs collection: metadata about each student organization.
+    match /clubs/{clubId} {
+      allow read: if isOwnClub(clubId);
+      allow write: if isClubAdmin(clubId);
+    }
+
+    // Handover packets are strictly isolated per club_id.
+    match /clubs/{clubId}/packets/{packetId} {
+      allow read: if isOwnClub(clubId);
+      allow create: if isOwnClub(clubId) &&
+        request.resource.data.club_id == clubId;
+      allow update: if isOwnClub(clubId) &&
+        request.resource.data.club_id == clubId;
+      allow delete: if isClubAdmin(clubId);
+    }
+
+    // Vendor / contacts directory, isolated per club.
+    match /clubs/{clubId}/contacts/{contactId} {
+      allow read: if isOwnClub(clubId);
+      allow write: if isOwnClub(clubId);
+    }
+
+    // Deny everything else by default.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
