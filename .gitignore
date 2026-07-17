@@ -15,6 +15,9 @@ dist
 .DS_Store
 "@ | Out-File -Encoding utf8 .gitignore
 
+.agents/
+.claude/
+
 node_modules
 dist
 dist-ssr
