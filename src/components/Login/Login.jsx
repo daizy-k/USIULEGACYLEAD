@@ -12,55 +12,52 @@ export default function Login() {
       email,
       password,
     });
-
-    // TODO:
-    // Send login request to backend/Firebase
   };
 
   return (
     <div className="login-page">
       <form className="login-form" onSubmit={handleSubmit}>
 
-        <h4>USIU-AFRICA STUDENTS ONLY</h4>
+        <div className="badge">
+          USIU-AFRICA STUDENTS ONLY
+        </div>
 
-        <h1>Pass the torch, not the guesswork.</h1>
+        <h1 className="title">
+          Pass the torch, not the guesswork.
+        </h1>
 
-        <p>
+        <p className="subtitle">
           Sign in to hand over or receive a leadership role.
         </p>
 
         <label htmlFor="email">
-          USIU Email
+          USIU-EMAIL
         </label>
 
         <input
           id="email"
           type="email"
-          placeholder="john.doe@usiu.ac.ke"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          required
         />
 
         <label htmlFor="password">
-          Password
+          PASSWORD
         </label>
 
         <input
           id="password"
           type="password"
-          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          required
         />
 
         <button type="submit">
-          Sign In
+          Sign in
         </button>
 
         <p className="admin-text">
-          Admin? Use the admin sign-in link on the staff portal.
+          Admin? Use the admin sign-in link on the staff portal
         </p>
 
       </form>
