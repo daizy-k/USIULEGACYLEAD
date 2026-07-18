@@ -5,7 +5,7 @@
     font-family:Inter,Arial,sans-serif;
 }
 
-.login-page{
+.signup-page{
     min-height:100vh;
     display:flex;
     justify-content:center;
@@ -14,7 +14,7 @@
     padding:30px;
 }
 
-.login-form{
+.signup-form{
     width:540px;
     height:fit-content;
     background:#f8f8f8;
@@ -59,7 +59,7 @@
     margin-bottom:24px;
 }
 
-.login-form label{
+.signup-form label{
     font-size:15px;
     font-weight:800;
     color:#000;
@@ -68,7 +68,7 @@
     text-align:left;
 }
 
-.login-form input{
+.signup-form input{
     width:100%;
     height:48px;
 
@@ -87,11 +87,11 @@
     color:#000;
 }
 
-.login-form input::placeholder{
+.signup-form input::placeholder{
     color:#777;
 }
 
-.login-form button{
+.signup-form button{
     width:100%;
     height:54px;
 
@@ -110,7 +110,7 @@
     
 }
 
-.login-form button:hover{
+.signup-form button:hover{
     transform: translate(1.1,1);
     background:#f59b00;
     transition:.2s;
@@ -119,5 +119,11 @@
 .admin-text{
     margin-top:26px;
     font-size:.20px;
+    color:#000;
+}
+
+.login-text{
+     margin-top:26px;
+    font-size:20px;
     color:#000;
 }

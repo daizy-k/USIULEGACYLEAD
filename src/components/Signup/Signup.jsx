@@ -1,7 +1,8 @@
-import "./Login.css";
+import "./Signup.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-export default function Login() {
+export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,8 +16,8 @@ export default function Login() {
   };
 
   return (
-    <div className="login-page">
-      <form className="login-form" onSubmit={handleSubmit}>
+    <div className="signup-page">
+      <form className="signup-form" onSubmit={handleSubmit}>
 
         <div className="badge">
           USIU-AFRICA STUDENTS ONLY
@@ -27,7 +28,7 @@ export default function Login() {
         </h1>
 
         <p className="subtitle">
-          Sign in to hand over or receive a leadership role.
+          Sign up to the USIULEGACYLEAD platform
         </p>
 
         <label htmlFor="email">
@@ -60,6 +61,9 @@ export default function Login() {
           Admin? Use the admin sign-in link on the staff portal
         </p>
 
+        <p className="login-text">
+            Already a signed in? <Link to ="/" >Click here</Link>
+        </p>
       </form>
     </div>
   );
