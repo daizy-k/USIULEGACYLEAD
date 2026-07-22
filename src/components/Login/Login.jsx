@@ -1,5 +1,6 @@
 import "./Login.css";
 import { useState } from "react";
+import { Link }  from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -59,7 +60,9 @@ export default function Login() {
         <p className="admin-text">
           Admin? Use the admin sign-in link on the staff portal
         </p>
-
+       <p className="signup-text">
+          Not a user?<Link to ="/signup" style={{color:'navyblue'}}>Sign up here</Link>
+       </p>
       </form>
     </div>
   );

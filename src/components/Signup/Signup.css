@@ -10,14 +10,14 @@
     display:flex;
     justify-content:center;
     align-items:center;
-    background:#0A2C5C;
+    background:#f3c920;
     padding:30px;
 }
 
 .signup-form{
     width:540px;
     height:fit-content;
-    background:#f8f8f8;
+    background:#031654;
     border-radius:28px;
     padding:30px;
     display:flex;
@@ -44,25 +44,25 @@
     margin-bottom:35px;
 }
 
-.title{
+.signup-title{
     font-size:35px;
     font-weight:900;
     line-height:1.05;
-    color:#000;
+    color:#fff;
 
     margin-bottom:35px;
 }
 
-.subtitle{
+.signup-subtitle{
     font-size:1rem;
-    color:#000;
+    color:#fff;
     margin-bottom:24px;
 }
 
 .signup-form label{
     font-size:15px;
     font-weight:800;
-    color:#000;
+    color:#fff;
     margin-bottom:8px;
     text-transform:uppercase;
     text-align:left;
@@ -85,6 +85,7 @@
 
     margin-bottom:26px;
     color:#000;
+   
 }
 
 .signup-form input::placeholder{
@@ -99,9 +100,9 @@
 
     border-radius:999px;
 
-    background:#FFA500;
+    background:#f3c920;
 
-    color:#000;
+    color:#565151;
 
     font-size:20px;
 
@@ -119,11 +120,16 @@
 .admin-text{
     margin-top:26px;
     font-size:.20px;
-    color:#000;
+    color:#fff;
 }
 
 .login-text{
      margin-top:26px;
     font-size:20px;
-    color:#000;
+    color:#fff;
 }
+
+.input{
+    color: #000;
+}
+
