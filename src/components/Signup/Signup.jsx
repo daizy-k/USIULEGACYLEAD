@@ -23,11 +23,11 @@ export default function Signup() {
           USIU-AFRICA STUDENTS ONLY
         </div>
 
-        <h1 className="title">
+        <h1 className="signup-title">
           Pass the torch, not the guesswork.
         </h1>
 
-        <p className="subtitle">
+        <p className="signup-subtitle">
           Sign up to the USIULEGACYLEAD platform
         </p>
 
@@ -54,7 +54,7 @@ export default function Signup() {
         />
 
         <button type="submit" >
-          Sign in
+          Sign up
         </button>
 
         <p className="admin-text">
