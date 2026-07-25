@@ -1,35 +1,65 @@
-import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import { Routes, Route, useLocation } from "react-router-dom";
+import TopNav from "./components/TopNav";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AdminRoute from "./components/AdminRoute";
 import Home from "./pages/Home";
-import Login from "./pages/LoginPage";
-import Signup from "./pages/SignupPage";
+import Login from "./components/Login/Login";
+// import Login from "./pages/LoginPage";
+import Signup from "./components/Signup/Signup";
+// import Signup from "./pages/SignupPage";
 import Dashboard from "./pages/Dashboard";
+import AdminOrganizations from "./pages/Adminorganizations";
+import AdminDeadlines from "./pages/Admindeadlines";
+import AdminReports from "./pages/Adminreports";
+import AdminReview from "./pages/Adminreview";
 import HandoverPackets from "./pages/HandoverPackect";
+import Notifications from "./pages/Notification";
 import Leaderboard from "./pages/Leaderboard";
 import Profile from "./pages/Profile";
 
+
+const HIDE_NAV_PREFIXES = ["/dashboard", "/login", "/signup"];
+ 
 export default function App() {
+  const location = useLocation();
+  const hideNav = HIDE_NAV_PREFIXES.some((prefix) => location.pathname.startsWith(prefix));
+ 
   return (
     <>
-      <Navbar />
+      {!hideNav && <TopNav />}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+ 
+        {/* Admin section — gated by role, not just login */}
+        <Route path="/dashboard" element={<AdminRoute><Dashboard /></AdminRoute>} />
+        <Route path="/dashboard/organizations" element={<AdminRoute><AdminOrganizations /></AdminRoute>} />
+        <Route path="/dashboard/deadlines" element={<AdminRoute><AdminDeadlines /></AdminRoute>} />
+        <Route path="/dashboard/reports" element={<AdminRoute><AdminReports /></AdminRoute>} />
+        <Route path="/dashboard/review/:packetId" element={<AdminRoute><AdminReview /></AdminRoute>} />
+ 
         <Route
           path="/handover-packets"
           element={
             <ProtectedRoute>
               <HandoverPackets />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/review/:packetId"
+          element={
+            <ProtectedRoute>
+              <Review />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/notifications"
+          element={
+            <ProtectedRoute>
+              <Notifications />
             </ProtectedRoute>
           }
         />
