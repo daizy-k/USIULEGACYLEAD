@@ -12,10 +12,13 @@ import AdminOrganizations from "./pages/Adminorganizations";
 import AdminDeadlines from "./pages/Admindeadlines";
 import AdminReports from "./pages/Adminreports";
 import AdminReview from "./pages/Adminreview";
-import HandoverPackets from "./pages/HandoverPackect";
+import HandoverPackets from "./pages/HandoverPacket";
 import Notifications from "./pages/Notification";
 import Leaderboard from "./pages/Leaderboard";
+import Review from "./pages/Review";
 import Profile from "./pages/Profile";
+
+
 
 
 const HIDE_NAV_PREFIXES = ["/dashboard", "/login", "/signup"];
