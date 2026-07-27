@@ -10,7 +10,7 @@ import AdminOrganizations from "./pages/Adminorganizations";
 import AdminDeadlines from "./pages/Admindeadlines";
 import AdminReports from "./pages/Adminreports";
 import AdminReview from "./pages/Adminreview";
-import HandoverPackets from "./pages/HandoverPacket";
+import HandoverPacket from "./pages/HandoverPacket";
 import Notifications from "./pages/Notification";
 import Leaderboard from "./pages/Leaderboard";
 import Review from "./pages/Review";
@@ -44,7 +44,7 @@ export default function App() {
           path="/handover-packets"
           element={
             <ProtectedRoute>
-              <HandoverPackets />
+              <HandoverPacket />
             </ProtectedRoute>
           }
         />
