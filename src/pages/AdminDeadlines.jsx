@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import AdminSidebar from "../components/AdminSidebar";
-import { getAllOrganizations, updateOrganizationDeadline } from "../services/orgService";
+import { getAllOrganizations, updateOrganizationDeadline } from "../services/OrgService";
 
 function DeadlineRow({ org, onSave, saving }) {
   const [value, setValue] = useState(org.deadline || "");
