@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getAllOrganizations } from "../services/orgService";
+import { getAllOrganizations } from "../services/OrgService";
 
 export default function Home() {
   const [search, setSearch] = useState("");

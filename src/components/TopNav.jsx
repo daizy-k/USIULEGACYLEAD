@@ -29,14 +29,19 @@ export default function TopNav() {
           <Link to="/handover-packets" className={isActive("/handover-packets") ? "active" : ""}>
             My Handovers
           </Link>
+           <Link to="/notes" className={isActive("/notes") ? "active" : ""}>
+            Notes
+          </Link>
           <Link to="/notifications" className={isActive("/notifications") ? "active" : ""}>
             Notifications
           </Link>
+         
         </div>
       </div>
       <div className="right">
-        <Link to="/dashboard" className="util-link">Admin view →</Link>
-        <div className="avatar" title={user?.email || ""}>{initials}</div>
+        <Link to="/profile" className="avatar" title={user?.email || ""} style={{ textDecoration: "none" }}>
+          {initials}
+        </Link>
       </div>
     </div>
   );

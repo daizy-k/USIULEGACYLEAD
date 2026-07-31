@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { getUserProfile } from "../services/UserService.js";
-
+import { getUserProfile } from "../services/UserService";
 
 export default function AdminRoute({ children }) {
   const { user } = useAuth();
@@ -16,10 +15,19 @@ export default function AdminRoute({ children }) {
         setChecking(false);
         return;
       }
-      const profile = await getUserProfile(user.uid);
-      if (!cancelled) {
-        setIsAdmin(profile?.role === "admin");
-        setChecking(false);
+      try {
+        const profile = await getUserProfile(user.uid);
+       
+        if (!cancelled) {
+          setIsAdmin(profile?.role === "admin");
+          setChecking(false);
+        }
+      } catch (err) {
+        console.error("AdminRoute failed to load profile:", err);
+        if (!cancelled) {
+          setIsAdmin(false);
+          setChecking(false);
+        }
       }
     }
     check();

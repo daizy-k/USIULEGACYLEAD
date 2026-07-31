@@ -3,18 +3,16 @@ import TopNav from "./components/TopNav";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRoute from "./components/AdminRoute";
 import Home from "./pages/Home";
-import Login from "./components/Login/Login";
-// import Login from "./pages/LoginPage";
-import Signup from "./components/Signup/Signup";
-// import Signup from "./pages/SignupPage";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
-import AdminOrganizations from "./pages/Adminorganizations";
-import AdminDeadlines from "./pages/Admindeadlines";
-import AdminReports from "./pages/Adminreports";
-import AdminReview from "./pages/Adminreview";
+import AdminOrganizations from "./pages/AdminOrganizations";
+import AdminDeadlines from "./pages/AdminDeadlines";
+import AdminReports from "./pages/AdminReports";
+import AdminReview from "./pages/AdminReview";
 import HandoverPacket from "./pages/HandoverPacket";
 import Notifications from "./pages/Notification";
-import Leaderboard from "./pages/Leaderboard";
+import Notes from "./pages/Notes";
 import Review from "./pages/Review";
 import Profile from "./pages/Profile";
 
@@ -32,8 +30,8 @@ export default function App() {
       {!hideNav && <TopNav />}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
  
         {/* Admin section — gated by role, not just login */}
         <Route path="/dashboard" element={<AdminRoute><Dashboard /></AdminRoute>} />
@@ -66,7 +64,15 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/leaderboard" element={<Leaderboard />} />
+         <Route
+          path="/notes"
+          element={
+            <ProtectedRoute>
+              <Notes />
+            </ProtectedRoute>
+          }
+        />
+        
         <Route
           path="/profile"
           element={
