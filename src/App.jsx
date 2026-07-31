@@ -30,8 +30,8 @@ export default function App() {
       {!hideNav && <TopNav />}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
  
         {/* Admin section — gated by role, not just login */}
         <Route path="/dashboard" element={<AdminRoute><Dashboard /></AdminRoute>} />
