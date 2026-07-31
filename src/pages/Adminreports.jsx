@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import AdminSidebar from "../components/AdminSidebar";
-import { getAllPackets } from "../services/Handoverservice";
+import { getAllPackets } from "../services/HandoverService";
 
 export default function AdminReports() {
   const [packets, setPackets] = useState([]);

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AdminSidebar from "../components/Adminsidebar";
-import { getAllPackets } from "../services/Handoverservice";
+import { getAllPackets } from "../services/HandoverService";
 
 const STATUS_MAP = {
   draft: { label: "Not started", className: "danger" },

@@ -1,18 +1,3 @@
-// Handles reading/writing handover packets in Firestore.
-// Collection shape: handoverPackets/{packetId}
-// {
-//   orgId, orgName,
-//   outgoingLeaderId, outgoingLeaderName,
-//   incomingLeaderId, incomingLeaderName,
-//   yearInReview, ongoingProjects, keyContacts,
-//   notes,                          <- private scratchpad, not part of the formal submission
-//   documents: [{ name, url, publicId, uploadedAt }],
-//   status: "draft" | "pending_admin_review" | "changes_requested" | "pending_incoming_review" | "complete",
-//   adminNote,                      <- admin's feedback if they requested changes
-//   comments: [{ authorId, authorName, text, createdAt }],
-//   createdAt, updatedAt, submittedAt, adminReviewedAt, acceptedAt
-// }
-
 import {
   collection,
   doc,
@@ -46,7 +31,6 @@ export async function createDraftPacket({ orgId, orgName, outgoingLeaderId, outg
     yearInReview: "",
     ongoingProjects: "",
     keyContacts: "",
-    notes: "",
     documents: [],
     comments: [],
     status: "draft",

@@ -1,9 +1,17 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { getUserProfile } from "../services/Userservice.js";
-import { getPacket, getOrCreateDraftPacket, getOrClaimPacketForOrg, saveDraft, submitPacket, addDocumentsToPacket, getMissingFields } from "../services/Handoverservice";
-import { uploadDocument } from "../services/Cloudinary";
+import { getUserProfile } from "../services/UserService";
+import {
+  getPacket,
+  getOrCreateDraftPacket,
+  getOrClaimPacketForOrg,
+  saveDraft,
+  submitPacket,
+  addDocumentsToPacket,
+  getMissingFields,
+} from "../services/HandoverService";
+import { uploadDocuments } from "../services/cloudinaryServices";
 
 const STEPS = ["Overview", "Projects", "Contacts", "Documents"];
 
@@ -20,7 +28,7 @@ export default function HandoverPacket() {
   const [profile, setProfile] = useState(null);
   const [packetId, setPacketId] = useState(null);
   const [packet, setPacket] = useState(null);
-  const [fields, setFields] = useState({ yearInReview: "", ongoingProjects: "", keyContacts: "", notes: "" });
+  const [fields, setFields] = useState({ yearInReview: "", ongoingProjects: "", keyContacts: "" });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [saveStatus, setSaveStatus] = useState("");
@@ -76,7 +84,6 @@ export default function HandoverPacket() {
           yearInReview: data.yearInReview || "",
           ongoingProjects: data.ongoingProjects || "",
           keyContacts: data.keyContacts || "",
-          notes: data.notes || "",
         });
       } catch (err) {
         console.error("Failed to load/create packet:", err);
@@ -227,16 +234,6 @@ export default function HandoverPacket() {
             placeholder="Name, role, and contact info for people this role depends on"
             value={fields.keyContacts}
             onChange={(e) => handleFieldChange("keyContacts", e.target.value)}
-            disabled={!isEditable}
-          />
-        </div>
-
-        <div className="form-section">
-          <div className="label">📝 My notes <span className="mono" style={{ color: "var(--text-2)", fontWeight: 400 }}>(private — not part of the official handover)</span></div>
-          <textarea
-            placeholder="Jot things down here while you're still figuring out what goes in the sections above"
-            value={fields.notes}
-            onChange={(e) => handleFieldChange("notes", e.target.value)}
             disabled={!isEditable}
           />
         </div>

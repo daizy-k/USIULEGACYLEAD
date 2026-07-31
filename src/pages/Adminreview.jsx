@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import AdminSidebar from "../components/AdminSidebar";
-import { getPacket, adminApprovePacket, adminRequestChanges } from "../services/Handoverservice";
+import { getPacket, adminApprovePacket, adminRequestChanges } from "../services/HandoverService";
 
 export default function AdminReview() {
   const { packetId } = useParams();

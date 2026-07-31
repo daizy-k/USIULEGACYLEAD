@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { getUserProfile } from "../services/Userservice.js";
+import { getUserProfile } from "../services/UserService.js";
 
 
 export default function AdminRoute({ children }) {
