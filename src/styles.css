@@ -18,6 +18,7 @@
   --radius:10px;
 }
 *{box-sizing:border-box; margin:0; padding:0;}
+html, body, #root{width:100%; min-height:100vh;}
 body{font-family:'Inter', sans-serif; background:var(--sand); color:var(--ink);}
 h1,h2,h3,.display{font-family:'Sora', sans-serif;}
 .mono{font-family:'JetBrains Mono', monospace; letter-spacing:0.02em;}
@@ -54,15 +55,23 @@ h1,h2,h3,.display{font-family:'Sora', sans-serif;}
 
 /* login */
 .login-wrap{min-height:100vh; display:flex; align-items:center; justify-content:center; background:linear-gradient(160deg, var(--navy) 0%, var(--navy-dark) 100%); padding:40px;}
-.login-card{background:var(--card); border-radius:16px; padding:44px; width:380px; box-shadow:0 20px 60px rgba(0,0,0,0.3);}
-.login-card .tag{display:inline-block; background:var(--sand); color:var(--warning); font-family:'JetBrains Mono'; font-size:11px; padding:4px 10px; border-radius:20px; margin-bottom:16px;}
-.login-card h1{font-size:24px; margin-bottom:6px; line-height:1.2;}
-.login-card .sub{margin-bottom:26px;}
-.field{margin-bottom:16px;}
+.login-card{background:var(--card); border-radius:16px; padding:48px; width:380px; box-shadow:0 20px 60px rgba(0,0,0,0.3);}
+.login-card .tag{display:inline-block; background:var(--sand); color:var(--warning); font-family:'JetBrains Mono'; font-size:11px; padding:4px 10px; border-radius:20px; margin-bottom:20px;}
+.login-card h1{font-size:24px; margin-bottom:12px; line-height:1.35; color: var(--ink);}
+.login-card .sub{margin-bottom:30px;}
+.field{margin-bottom:20px;}
 .field label{display:block; font-size:12px; font-weight:600; margin-bottom:6px; color:var(--text-2);}
-.field input, .field textarea{width:100%; padding:11px 14px; border:1px solid var(--border); border-radius:8px; font-family:'Inter'; font-size:14px; background:var(--sand);}
+.field input, .field textarea{width:100%; padding:11px 14px; border:1px solid var(--border); border-radius:8px; font-family:'Inter'; font-size:14px; background:var(--sand); color: var(--ink); color-scheme: light;}
 .login-card .btn-primary{width:100%; padding:13px; margin-top:6px;}
 .error-text{color:var(--danger); font-size:12px; margin-top:6px;}
+
+.field input:-webkit-autofill,
+.field input:-webkit-autofill:hover,
+.field input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--ink);
+  -webkit-box-shadow: 0 0 0px 1000px var(--sand) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
 
 /* directory */
 .search-row{display:flex; gap:12px; margin-bottom:28px;}
@@ -130,3 +139,61 @@ td{padding:14px 18px; border-bottom:1px solid var(--border); font-size:13px;}
 tr:last-child td{border-bottom:none;}
 
 .loading-state, .empty-state{padding:40px; text-align:center; color:var(--text-2); font-size:14px;}
+
+/* ===================== RESPONSIVE ===================== */
+
+.table-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch;}
+.table-scroll table{min-width:520px;}
+
+.profile-layout{display:grid; grid-template-columns:1.6fr 1fr; gap:24px;}
+
+@media (max-width: 768px){
+  /* Admin sidebar collapses to a horizontal scrollable strip */
+  .admin-shell{flex-direction:column;}
+  .admin-sidebar{
+    width:100%; flex-direction:row; align-items:center; justify-content:flex-start;
+    overflow-x:auto; padding:14px 16px; gap:20px; flex-shrink:0;
+  }
+  .admin-sidebar > div:first-child{display:flex; align-items:center; gap:16px;}
+  .admin-sidebar .brand{margin-bottom:0; flex-shrink:0;}
+  .admin-sidebar .section-label{display:none;}
+  .admin-sidebar .navitem{white-space:nowrap; margin-bottom:0;}
+  .admin-sidebar .back{white-space:nowrap; flex-shrink:0;}
+
+  /* Two-column layouts stack */
+  .review-layout, .profile-layout{grid-template-columns:1fr;}
+
+  /* Page padding shrinks */
+  .page{padding:24px 20px;}
+  .admin-topbar{padding:20px 20px 0; flex-wrap:wrap; gap:12px;}
+
+  /* Stepper: hide text labels, keep dots+numbers so it still fits */
+  .steplabel{display:none;}
+
+  /* Form action rows wrap instead of overflowing */
+  .form-actions{flex-wrap:wrap;}
+  .form-actions .save-status{width:100%; margin-right:0; margin-bottom:4px;}
+}
+
+@media (max-width: 640px){
+  /* Top navbar stacks into two rows instead of squeezing everything horizontally */
+  .topnav{
+    flex-direction:column; align-items:stretch; height:auto;
+    padding:14px 16px; gap:12px;
+  }
+  .topnav .left{flex-direction:column; align-items:flex-start; gap:12px;}
+  .topnav .navlinks{gap:18px; overflow-x:auto; width:100%;}
+  .topnav .right{align-self:flex-end;}
+}
+
+@media (max-width: 480px){
+  .login-wrap{padding:16px;}
+  .login-card{width:100%; padding:28px 22px;}
+
+  .search-row input{max-width:none; width:100%;}
+  .search-row{flex-wrap:wrap;}
+
+  .doc-list li{flex-wrap:wrap; gap:4px;}
+
+  h1{font-size:22px;}
+}
