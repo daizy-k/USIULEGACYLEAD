@@ -62,7 +62,7 @@ export default function Signup() {
         </p>
 
         <p className="login-text">
-            Already a signed in? <Link to ="/" >Click here</Link>
+            Already have an account? Sign in <Link to ="/" >Click here</Link>
         </p>
       </form>
     </div>

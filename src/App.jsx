@@ -17,6 +17,8 @@ import Review from "./pages/Review";
 import Profile from "./pages/Profile";
 
 
+
+
 const HIDE_NAV_PREFIXES = ["/dashboard", "/login", "/signup"];
  
 export default function App() {
@@ -42,7 +44,7 @@ export default function App() {
           path="/handover-packets"
           element={
             <ProtectedRoute>
-              <HandoverPackets />
+              <HandoverPacket />
             </ProtectedRoute>
           }
         />
