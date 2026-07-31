@@ -5,6 +5,21 @@ import { auth } from "../firebase/config";
 import { createUserProfile } from "../services/UserService";
 import { getAllOrganizations } from "../services/OrgService";
 
+function getPasswordStrength(password) {
+  if (!password) return { label: "", score: 0 };
+
+  let score = 0;
+  if (password.length >= 8) score++;
+  if (password.length >= 12) score++;
+  if (/[a-z]/.test(password) && /[A-Z]/.test(password)) score++;
+  if (/\d/.test(password)) score++;
+  if (/[^A-Za-z0-9]/.test(password)) score++;
+
+  if (score <= 1) return { label: "Weak", score };
+  if (score <= 3) return { label: "Medium", score };
+  return { label: "Strong", score };
+}
+
 export default function Signup() {
   const navigate = useNavigate();
   const [orgs, setOrgs] = useState([]);
@@ -13,6 +28,7 @@ export default function Signup() {
     name: "",
     email: "",
     password: "",
+    confirmPassword: "",
     orgId: "",
     role: "outgoing",
   });
@@ -33,6 +49,14 @@ export default function Signup() {
     setForm((prev) => ({ ...prev, [field]: value }));
   }
 
+  const passwordStrength = getPasswordStrength(form.password);
+  const strengthColor =
+    passwordStrength.label === "Weak"
+      ? "var(--danger)"
+      : passwordStrength.label === "Medium"
+      ? "var(--warning)"
+      : "var(--success)";
+
   async function handleSubmit(e) {
     e.preventDefault();
     setError(null);
@@ -43,6 +67,14 @@ export default function Signup() {
     }
     if (!form.orgId) {
       setError("Please select an organization.");
+      return;
+    }
+    if (passwordStrength.score <= 1) {
+      setError("Please choose a stronger password — at least 8 characters, mixing letters, numbers, and symbols.");
+      return;
+    }
+    if (form.password !== form.confirmPassword) {
+      setError("Passwords don't match.");
       return;
     }
 
@@ -105,6 +137,25 @@ export default function Signup() {
                 minLength={6}
                 required
               />
+              {form.password && (
+                <p className="mono" style={{ fontSize: "11px", marginTop: "4px", color: strengthColor }}>
+                  Strength: {passwordStrength.label}
+                </p>
+              )}
+            </div>
+
+            <div className="field">
+              <label>CONFIRM PASSWORD</label>
+              <input
+                type="password"
+                value={form.confirmPassword}
+                onChange={(e) => update("confirmPassword", e.target.value)}
+                minLength={6}
+                required
+              />
+              {form.confirmPassword && form.password !== form.confirmPassword && (
+                <p className="error-text">Passwords don't match</p>
+              )}
             </div>
 
             <div className="field">
@@ -112,7 +163,7 @@ export default function Signup() {
               <select
                 value={form.orgId}
                 onChange={(e) => update("orgId", e.target.value)}
-                style={{ width: "100%", padding: "11px 14px", border: "1px solid var(--border)", borderRadius: "8px", background: "var(--sand)", fontFamily: "Inter", fontSize: "14px" }}
+                style={{ width: "100%", padding: "11px 14px", border: "1px solid var(--border)", borderRadius: "8px", background: "var(--sand)", color: "var(--ink)", fontFamily: "Inter", fontSize: "14px" }}
               >
                 {orgs.map((org) => (
                   <option key={org.id} value={org.id}>{org.icon} {org.name}</option>
@@ -125,7 +176,7 @@ export default function Signup() {
               <select
                 value={form.role}
                 onChange={(e) => update("role", e.target.value)}
-                style={{ width: "100%", padding: "11px 14px", border: "1px solid var(--border)", borderRadius: "8px", background: "var(--sand)", fontFamily: "Inter", fontSize: "14px" }}
+                style={{ width: "100%", padding: "11px 14px", border: "1px solid var(--border)", borderRadius: "8px", background: "var(--sand)", color: "var(--ink)", fontFamily: "Inter", fontSize: "14px" }}
               >
                 <option value="outgoing">Outgoing leader (I'm handing over)</option>
                 <option value="incoming">Incoming leader (I'm receiving)</option>
@@ -138,7 +189,6 @@ export default function Signup() {
               {submitting ? "Creating account…" : "Sign up"}
             </button>
           </form>
-          
         )}
         <p style={{ textAlign: "center", marginTop: "16px", fontSize: "13px", color: "var(--text-2)" }}>
           Already have an account? <Link to="/login" style={{ color: "var(--navy)", fontWeight: 600 }}>Sign in</Link>

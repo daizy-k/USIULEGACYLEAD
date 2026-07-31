@@ -7,9 +7,7 @@
 //   createdAt
 // }
 //
-// This is what links a signed-in Firebase Auth user to a specific org and
-// role, so pages like HandoverPacket.jsx know which packet is "theirs"
-// without needing an org ID in the URL.
+// Personal notes live in their own subcollection now — see notesService.js.
 
 import { doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase/config";

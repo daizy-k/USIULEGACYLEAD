@@ -11,7 +11,7 @@ import {
   addDocumentsToPacket,
   getMissingFields,
 } from "../services/HandoverService";
-import { uploadDocuments } from "../services/cloudinaryServices";
+import { uploadDocuments } from "../services/Cloudinary";
 
 const STEPS = ["Overview", "Projects", "Contacts", "Documents"];
 
