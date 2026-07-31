@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import AdminSidebar from "../components/Adminsidebar";
+import AdminSidebar from "../components/AdminSidebar";
 import { getAllPackets } from "../services/Handoverservice";
 
 const STATUS_MAP = {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import AdminSidebar from "../components/AdminSidebar";
-import { createOrganization, getAllOrganizations } from "../services/Orgservice";
+import { createOrganization, getAllOrganizations } from "../services/orgService";
 
 
 export default function AdminOrganizations() {
