@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/useAuth";
 import { getUserProfile } from "../services/UserService";
 import {
   getPacket,
@@ -25,7 +25,6 @@ export default function HandoverPacket() {
   const navigate = useNavigate();
   const { user } = useAuth();
 
-  const [profile, setProfile] = useState(null);
   const [packetId, setPacketId] = useState(null);
   const [packet, setPacket] = useState(null);
   const [fields, setFields] = useState({ yearInReview: "", ongoingProjects: "", keyContacts: "" });
@@ -51,7 +50,7 @@ export default function HandoverPacket() {
           setLoading(false);
           return;
         }
-        setProfile(userProfile);
+        
 
         if (userProfile.role === "incoming") {
           const claimedPacketId = await getOrClaimPacketForOrg(

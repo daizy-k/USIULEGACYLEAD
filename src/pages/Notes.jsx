@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/useAuth";
 import { addNote, getNotes, updateNote, deleteNote } from "../services/NoteService";
 
 function formatDate(ts) {
@@ -21,10 +21,11 @@ export default function Notes() {
     setNotes(data);
     setLoading(false);
   }
-
- useEffect(() => {
-  // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional fetch-on-mount
+  
+useEffect(() => {
+   // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional fetch-on-mount
   if (user) load();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [user]);
 
   async function handleAdd() {

@@ -15,8 +15,11 @@ export default function AdminOrganizations() {
     setOrgs(data);
     setLoading(false);
   }
-
-  useEffect(() => { load(); }, []);
+  
+  useEffect(() => {
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional fetch-on-mount
+  load();
+}, []);
 
   async function handleSubmit(e) {
     e.preventDefault();

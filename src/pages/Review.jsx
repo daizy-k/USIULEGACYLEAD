@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/useAuth";
 import { getPacket, addComment, acceptPacket } from "../services/HandoverService";
 
 export default function Review() {
@@ -17,8 +17,12 @@ export default function Review() {
     setPacket(data);
     setLoading(false);
   }
-
-  useEffect(() => { load(); }, [packetId]);
+  
+ useEffect(() => {
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional fetch-on-mount
+  load();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [packetId]);
 
   async function handlePostComment() {
     if (!commentText.trim() || !user) return;

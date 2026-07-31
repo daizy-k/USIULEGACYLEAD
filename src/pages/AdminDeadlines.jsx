@@ -34,8 +34,11 @@ export default function AdminDeadlines() {
     setOrgs(data);
     setLoading(false);
   }
-
-  useEffect(() => { load(); }, []);
+  
+  useEffect(() => {
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional fetch-on-mount
+  load();
+}, []);
 
   async function handleSave(orgId, deadline) {
     setSavingId(orgId);

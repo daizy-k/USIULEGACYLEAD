@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/useAuth";
 import { getNotifications, markAsRead, markAllAsRead } from "../services/NotificationService";
 
 function formatDate(ts) {
@@ -25,11 +25,13 @@ export default function Notifications() {
     setNotifications(data);
     setLoading(false);
   }
+   
+ useEffect(() => {
+   // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional fetch-on-mount
+  if (user) load();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [user]);
 
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional fetch-on-mount
-    if (user) load();
-  }, [user]);
 
   async function handleMarkRead(notificationId) {
     await markAsRead(user.uid, notificationId);

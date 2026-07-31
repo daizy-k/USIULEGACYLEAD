@@ -16,8 +16,12 @@ export default function AdminReview() {
     setPacket(data);
     setLoading(false);
   }
-
-  useEffect(() => { load(); }, [packetId]);
+  
+ useEffect(() => {
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional fetch-on-mount
+  load();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [packetId]);
 
   async function handleApprove() {
     setBusy(true);
