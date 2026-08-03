@@ -2,7 +2,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import TopNav from "./components/TopNav";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRoute from "./components/AdminRoute";
-import Home from "./pages/Home";
+import RootRoute from "./components/RootRoute";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
@@ -29,7 +29,7 @@ export default function App() {
     <>
       {!hideNav && <TopNav />}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<RootRoute/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
  
